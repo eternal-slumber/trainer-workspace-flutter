@@ -49,3 +49,20 @@ app.*.map.json
 
 # Local mobile API configuration (no credentials in build defines).
 /config/local.json
+
+# Local specifications and development tooling.
+/specs/
+/specs /
+/docs/labs/
+/.agents/
+/.codex/
+/skills/
+/skills-lock.json
+
+# Local environment and signing credentials.
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+/android/key.properties
