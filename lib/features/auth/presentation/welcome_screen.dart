@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../app/auth_navigation.dart';
+import '../../../app/auth_scope.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -9,6 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final auth = AuthScope.of(context);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark.copyWith(
@@ -39,12 +41,12 @@ class WelcomeScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(24),
                                     child: Image.asset(
                                       'assets/icon/app_icon.png',
-                                      width: 112,
-                                      height: 112,
+                                      width: 96,
+                                      height: 96,
                                       semanticLabel: 'Логотип TW',
                                     ),
                                   ),
-                                  const SizedBox(height: 28),
+                                  const SizedBox(height: 16),
                                   Semantics(
                                     header: true,
                                     child: Text(
@@ -61,11 +63,30 @@ class WelcomeScreen extends StatelessWidget {
                                       color: theme.colorScheme.onSurfaceVariant,
                                     ),
                                   ),
+                                  const SizedBox(height: 8),
+                                  Wrap(
+                                    alignment: WrapAlignment.center,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    spacing: 12,
+                                    children: [
+                                      Text(
+                                        'Режим: ${auth.isDemo ? 'Демо' : 'Сервер'}',
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            AuthNavigation.openConnection(
+                                              context,
+                                            ),
+                                        child: const Text('Подключение'),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
                           ),
-                          const SizedBox(height: 48),
+                          const SizedBox(height: 16),
                           FilledButton(
                             onPressed: () => AuthNavigation.openLogin(context),
                             child: const Text('Войти'),
